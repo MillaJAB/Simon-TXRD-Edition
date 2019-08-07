@@ -86,8 +86,8 @@ function beepShiz() {
     } else if (answerKey[i] == 5) {
       blueActivated();
     } else {
-                   console.log("weirdness check");
-                   }
+        console.log("weirdness check");
+            }
         }, i * 1000);
       }(i));
     
@@ -207,12 +207,11 @@ $(".colorCircles").click(function() {
         if (playerAnswer.length == answerKey.length) {
           userTurn = false;
           if (count < 20) {
-            checkAnswer = 0;
+            resetAnswerTrackers();
             count++;
             setTimeout(function (){
               displayCount();
             }, 400);
-            playerAnswer = [];
             setTimeout(function (){
               round();
             }, 1500);
@@ -224,10 +223,10 @@ $(".colorCircles").click(function() {
       } else {
         userTurn = false;
         var replay = count;
-        checkAnswer = 0;
         count = "XX";
-        displayCount();    $("#counterText").fadeIn(200).fadeOut(200).fadeIn(200).fadeOut(200).fadeIn(200);
-        playerAnswer = [];
+        displayCount();
+        $("#counterText").fadeIn(200).fadeOut(200).fadeIn(200).fadeOut(200).fadeIn(200);
+        resetAnswerTrackers();
         if (!strict) {
           setTimeout(function () {
             count = replay;
@@ -246,6 +245,11 @@ $(".colorCircles").click(function() {
       }
   }
 })
+
+function resetAnswerTrackers() {
+  checkAnswer = 0;
+  playerAnswer = [];
+}
 
 //Toggles Strict mode on and off
 $("#buttonTopAdj").click(function() {
