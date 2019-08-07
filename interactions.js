@@ -19,33 +19,41 @@ $(document).ready(function() {
 // Flips the On/Off toggle visually and resets everything when turned off
 $("#onOffToggle").click(function() {
   if (toggle) {
-    toggle = false;
-    $("#onOffToggle").css("margin-left", "2px");
-    $("#counterText").hide();
-    userTurn = false;
-    checkAnswer = 0;
-    count = 0;
-    answerKey = [];
-    playerAnswer = [];
-    $("#light").css("opacity", "0.5");
-    strict = false;
+    offPosition();
   } else {
     toggle = true;
-    $("#onOffToggle").css("margin-left", "27px");
-    $("#counterText").html(" - -");
-    $("#counterText").show();
+    turnOn();
   }
 });
+
+function offPosition() {
+  toggle = false;
+  strict = false;
+  $("#counterText").hide();
+  $("#onOffToggle").css("margin-left", "2px");
+  $("#light").css("opacity", "0.5");
+  resetVariables();
+};
+
+function turnOn() {
+  $("#onOffToggle").css("margin-left", "27px");
+  $("#counterText").html(" - -");
+  $("#counterText").show();
+}
+
+function resetVariables() {
+  count = 0;
+  userTurn = false;
+  answerKey = [];
+  playerAnswer = [];
+  checkAnswer = 0;
+}
 
 //Displays the round number
 $("#startButton").click(function() {
   if (toggle) {
     if ($("#counterText").html() == "WIN") {
-      count = 0;
-      answerKey = [];
-      playerAnswer = [];
-      checkAnswer = 0;
-      userTurn = false;
+      resetVariables();
       $("#counterText").css("font-size", "67px").css("margin-left", "23px").css("position", "fixed").css("margin-top", "0px");
       $("#counterText").html("WIN");
     }
