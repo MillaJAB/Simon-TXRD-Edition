@@ -12,8 +12,9 @@ var checkAnswer = 0;
 
 $(document).ready(function() {
   // Makes the team text rounded
-  $(".simpleArc").arctext({radius: 280});
-  $(".harsherArc").arctext({radius: 180});
+  $(".simpleArc").arctext({ radius: 280 });
+  $(".harsherArc").arctext({ radius: 180 });
+  autoPlayGame();
 });
 
 // Flips the On/Off toggle visually and resets everything when turned off
@@ -260,4 +261,35 @@ $("#buttonTopAdj").click(function() {
     $("#light").css("opacity", "1");
     strict = true;
   }
-})
+});
+
+function autoPlayGame() {
+  $("#onOffToggle").click();
+  $("#startButton").click();
+  setTimeout(takePlayerTurnForever, 1000);
+}
+
+function takePlayerTurnForever() {
+  console.log(answerKey);
+  takePlayerTurn();
+  setTimeout(function() {
+    takePlayerTurnForever();
+  }, 1000 * (answerKey.length + 1));
+}
+
+function takePlayerTurn() {
+  for (i = 0; i < answerKey.length; i++) {
+    if (answerKey[i] == 1) {
+      $("#greenCircle").click();
+    } else if (answerKey[i] == 2) {
+      $("#pinkCircle").click();
+    } else if (answerKey[i] == 3) {
+      $("#blackCircle").click();
+    } else if (answerKey[i] == 4) {
+      $("#redCircle").click();
+    } else if (answerKey[i] == 5) {
+      $("#blueCircle").click();
+    }
+    console.log(answerKey, i);
+  }
+}
